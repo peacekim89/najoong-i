@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
     .select("id")
     .eq("user_id", user.id)
     .eq("original_url", parsedUrl.href)
-    .maybeSingle();
+    .maybeSingle() as { data: { id: string } | null };
 
   if (existing) {
     return NextResponse.json({ error: "이미 저장된 링크입니다", id: existing.id }, { status: 409 });
