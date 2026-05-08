@@ -48,8 +48,7 @@ export async function POST(req: NextRequest) {
       generateEmbedding(embedText),
     ]);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { data: item, error } = await (supabase as any)
+    const { data: item, error } = await (supabase as unknown as Record<string, (...args: unknown[]) => unknown>)
       .from("items")
       .insert({
         user_id: user.id,
