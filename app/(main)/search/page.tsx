@@ -145,7 +145,7 @@ export default function SearchPage() {
           <>
             <div className="flex items-center justify-between">
               <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
-                <span style={{ color: "var(--color-text)", fontWeight: "var(--fw-title)" }}>"{query}"</span> 검색 결과 {results.length}개
+                <span style={{ color: "var(--color-text)", fontWeight: "var(--fw-title)" }}>&ldquo;{query}&rdquo;</span> 검색 결과 {results.length}개
               </p>
             </div>
 
@@ -173,7 +173,7 @@ function NoResults({ query }: { query: string }) {
   return (
     <div className="flex flex-col items-center py-16 text-center space-y-3">
       <div className="text-5xl">🔍</div>
-      <p className="font-medium" style={{ color: "var(--color-text)" }}>"{query}"에 대한 결과가 없어요</p>
+      <p className="font-medium" style={{ color: "var(--color-text)" }}>&ldquo;{query}&rdquo;에 대한 결과가 없어요</p>
       <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
         저장된 링크가 적거나<br />다른 표현으로 검색해보세요
       </p>
