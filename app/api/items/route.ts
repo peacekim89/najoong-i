@@ -48,7 +48,8 @@ export async function POST(req: NextRequest) {
       generateEmbedding(embedText),
     ]);
 
-    const { data: item, error } = await supabase
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data: item, error } = await (supabase as any)
       .from("items")
       .insert({
         user_id: user.id,
@@ -60,7 +61,7 @@ export async function POST(req: NextRequest) {
         category: aiResult.category,
         thumbnail_url: crawled.thumbnail_url,
         raw_content: crawled.raw_content,
-        embedding: embedding as unknown as number[],
+        embedding: embedding,
       })
       .select()
       .single();
