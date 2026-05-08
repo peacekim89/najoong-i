@@ -1,0 +1,271 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ════════════════════════════════════════════
+   THEME TOKENS — data-theme 속성으로 전환
+════════════════════════════════════════════ */
+
+/* 기본 테마 (로그인 전 / 미선택 fallback) */
+:root {
+  --color-bg:          #fdf6f9;
+  --color-surface:     #ffffff;
+  --color-surface-2:   #fce7f3;
+  --color-border:      #fbb6ce;
+  --color-accent:      #f472b6;
+  --color-accent-2:    #e879f9;
+  --color-accent-deep: #be185d;
+  --color-text:        #1f2937;
+  --color-text-muted:  #9ca3af;
+  --color-tag:         #f472b6;
+
+  --radius-sm:   12px;
+  --radius-md:   20px;
+  --radius-lg:   28px;
+  --radius-chip: 100px;
+  --radius-btn:  100px;
+  --radius-fab:  50%;
+
+  --border-card:   1.5px solid #fce7f3;
+  --shadow-card:   0 4px 20px rgba(244,114,182,0.10);
+  --shadow-fab:    0 8px 24px rgba(244,114,182,0.45);
+  --btn-bg:        linear-gradient(135deg, #f472b6, #e879f9);
+  --btn-fg:        #ffffff;
+  --nav-border:    1.5px dashed #fbb6ce;
+
+  --font-display:  'Nunito', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --font-body:     'Nunito', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --fw-logo:       800;
+  --fw-title:      700;
+  --icon-stroke:   1.75;
+}
+
+/* ─── 🌸 Rosé Journal ─── */
+[data-theme="roze"] {
+  --color-bg:          #fdf6f9;
+  --color-surface:     #ffffff;
+  --color-surface-2:   #fce7f3;
+  --color-border:      #fbb6ce;
+  --color-accent:      #f472b6;
+  --color-accent-2:    #e879f9;
+  --color-accent-deep: #be185d;
+  --color-text:        #1f2937;
+  --color-text-muted:  #9ca3af;
+  --color-tag:         #f472b6;
+
+  --radius-sm:   12px;
+  --radius-md:   20px;
+  --radius-lg:   28px;
+  --radius-chip: 100px;
+  --radius-btn:  100px;
+  --radius-fab:  50%;
+
+  --border-card:   1.5px solid #fce7f3;
+  --shadow-card:   0 4px 20px rgba(244,114,182,0.10);
+  --shadow-fab:    0 8px 24px rgba(244,114,182,0.45);
+  --btn-bg:        linear-gradient(135deg, #f472b6, #e879f9);
+  --btn-fg:        #ffffff;
+  --nav-border:    1.5px dashed #fbb6ce;
+
+  --font-display:  'Nunito', 'Apple SD Gothic Neo', sans-serif;
+  --font-body:     'Nunito', 'Apple SD Gothic Neo', sans-serif;
+  --fw-logo:       800;
+  --fw-title:      700;
+  --icon-stroke:   1.75;
+}
+
+/* ─── 🌑 Midnight Focus ─── */
+[data-theme="midnight"] {
+  --color-bg:          #08080f;
+  --color-surface:     #111118;
+  --color-surface-2:   #16161f;
+  --color-border:      #1e1e2e;
+  --color-accent:      #818cf8;
+  --color-accent-2:    #38bdf8;
+  --color-accent-deep: #3730a3;
+  --color-text:        #f4f4f5;
+  --color-text-muted:  #52525b;
+  --color-tag:         #3f3f46;
+
+  --radius-sm:   3px;
+  --radius-md:   6px;
+  --radius-lg:   8px;
+  --radius-chip: 4px;
+  --radius-btn:  4px;
+  --radius-fab:  4px;
+
+  --border-card:   1px solid #1e1e2e;
+  --shadow-card:   none;
+  --shadow-fab:    none;
+  --btn-bg:        transparent;
+  --btn-fg:        #818cf8;
+  --nav-border:    1px solid #16161f;
+
+  --font-display:  'Space Grotesk', 'Apple SD Gothic Neo', sans-serif;
+  --font-body:     'Space Grotesk', 'Apple SD Gothic Neo', sans-serif;
+  --fw-logo:       700;
+  --fw-title:      600;
+  --icon-stroke:   1.5;
+}
+
+/* ─── 💼 Workday Minimal ─── */
+[data-theme="workday"] {
+  --color-bg:          #f9fafb;
+  --color-surface:     #ffffff;
+  --color-surface-2:   #f0f9ff;
+  --color-border:      #e2e8f0;
+  --color-accent:      #0284c7;
+  --color-accent-2:    #34d399;
+  --color-accent-deep: #0369a1;
+  --color-text:        #0f172a;
+  --color-text-muted:  #64748b;
+  --color-tag:         #cbd5e1;
+
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   10px;
+  --radius-chip: 4px;
+  --radius-btn:  6px;
+  --radius-fab:  8px;
+
+  --border-card:   1px solid #e2e8f0;
+  --shadow-card:   0 1px 4px rgba(15,23,42,0.05);
+  --shadow-fab:    0 4px 14px rgba(2,132,199,0.28);
+  --btn-bg:        #0284c7;
+  --btn-fg:        #ffffff;
+  --nav-border:    1px solid #e2e8f0;
+
+  --font-display:  'Instrument Sans', 'Apple SD Gothic Neo', sans-serif;
+  --font-body:     'Instrument Sans', 'Apple SD Gothic Neo', sans-serif;
+  --fw-logo:       700;
+  --fw-title:      600;
+  --icon-stroke:   1.75;
+}
+
+/* ─── ⚡ Campus Fresh ─── */
+[data-theme="campus"] {
+  --color-bg:          #fffef5;
+  --color-surface:     #ffffff;
+  --color-surface-2:   #d9f99d;
+  --color-border:      #1a1a1a;
+  --color-accent:      #84cc16;
+  --color-accent-2:    #fef08a;
+  --color-accent-deep: #4d7c0f;
+  --color-text:        #1a1a1a;
+  --color-text-muted:  #6b7280;
+  --color-tag:         #84cc16;
+
+  --radius-sm:   6px;
+  --radius-md:   14px;
+  --radius-lg:   16px;
+  --radius-chip: 8px;
+  --radius-btn:  100px;
+  --radius-fab:  50%;
+
+  --border-card:   2px solid #1a1a1a;
+  --shadow-card:   3px 3px 0 #1a1a1a;
+  --shadow-fab:    2px 2px 0 #1a1a1a;
+  --btn-bg:        #d9f99d;
+  --btn-fg:        #1a1a1a;
+  --nav-border:    2px solid #1a1a1a;
+
+  --font-display:  'Syne', 'Apple SD Gothic Neo', sans-serif;
+  --font-body:     'DM Sans', 'Apple SD Gothic Neo', sans-serif;
+  --fw-logo:       800;
+  --fw-title:      700;
+  --icon-stroke:   2.5;
+}
+
+/* ════════════════════════════════════════════
+   GLOBAL BASE
+════════════════════════════════════════════ */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  min-height: 100dvh;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* ════════════════════════════════════════════
+   THEME-AWARE COMPONENT OVERRIDES
+════════════════════════════════════════════ */
+
+/* 아이콘 stroke 자동 적용 */
+.theme-icon {
+  stroke-width: var(--icon-stroke);
+}
+
+/* Midnight: 칩 텍스트 대문자 + 자간 */
+[data-theme="midnight"] .theme-chip {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 9.5px;
+}
+
+/* Workday: 탭을 언더라인 스타일로 변환 */
+[data-theme="workday"] .theme-chip {
+  border-radius: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+[data-theme="workday"] .theme-chip.chip-active {
+  color: var(--color-accent) !important;
+  border-bottom-color: var(--color-accent);
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Campus: 칩 bold */
+[data-theme="campus"] .theme-chip {
+  font-weight: 800;
+}
+[data-theme="campus"] .theme-chip.chip-active {
+  box-shadow: 2px 2px 0 #1a1a1a;
+}
+
+/* Midnight: 매칭 이유 → left border accent */
+[data-theme="midnight"] .theme-match-reason {
+  background: var(--color-surface-2) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  border-left: 2px solid var(--color-accent) !important;
+  color: var(--color-accent) !important;
+}
+
+/* Midnight: 버튼 ghost border */
+[data-theme="midnight"] .theme-btn-primary {
+  border: 1px solid var(--color-accent-deep) !important;
+}
+
+/* ════════════════════════════════════════════
+   UTILITIES
+════════════════════════════════════════════ */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* iOS safe area */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 테마 전환 애니메이션 */
+*, *::before, *::after {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+/* 애니메이션 예외 (성능) */
+img, svg, video, canvas, [class*="animate-"] {
+  transition: none;
+}

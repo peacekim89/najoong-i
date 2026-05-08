@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <rect width="512" height="512" rx="128" fill="#0f172a"/>
+  <rect x="80" y="80" width="352" height="352" rx="80" fill="#0ea5e9" opacity="0.15"/>
+  <path d="M160 180 Q256 120 352 180 L352 340 Q256 390 160 340 Z" fill="#0ea5e9" opacity="0.3"/>
+  <circle cx="256" cy="256" r="60" fill="#0ea5e9"/>
+  <path d="M236 256 L250 270 L280 240" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <text x="256" y="420" font-family="system-ui" font-size="48" font-weight="700" fill="#94a3b8" text-anchor="middle">나중이</text>
+</svg>

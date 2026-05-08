@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>나중이 Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@700;900&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=Syne:wght@700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --doc-bg: #0a0a0f;
+  --doc-surface: #111118;
+  --doc-border: #1e1e2e;
+  --doc-text: #e2e8f0;
+  --doc-muted: #64748b;
+  --doc-accent: #6366f1;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--doc-bg);color:var(--doc-text);line-height:1.6;padding-bottom:80px}
+
+/* ── Doc Typography ── */
+.doc-title{font-size:clamp(28px,5vw,52px);font-weight:700;letter-spacing:-1.5px;background:linear-gradient(135deg,#e2e8f0,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.doc-subtitle{color:var(--doc-muted);font-size:16px;margin-top:8px}
+.section-title{font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--doc-accent);margin-bottom:24px;padding-bottom:8px;border-bottom:1px solid var(--doc-border)}
+.h2{font-size:clamp(20px,3vw,28px);font-weight:700;letter-spacing:-0.5px;color:#f1f5f9;margin-bottom:8px}
+.body-text{color:var(--doc-muted);font-size:15px;line-height:1.8}
+
+/* ── Layout ── */
+.container{max-width:1320px;margin:0 auto;padding:0 24px}
+.hero{padding:80px 24px 60px;text-align:center;border-bottom:1px solid var(--doc-border);background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(99,102,241,.12),transparent)}
+.section{padding:64px 24px}
+.section:nth-child(even){background:var(--doc-surface)}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+
+/* ── Token chips ── */
+.token{display:inline-flex;align-items:center;gap:8px;background:#1e1e2e;border:1px solid #2d2d44;border-radius:6px;padding:6px 12px;font-family:'Space Grotesk',monospace;font-size:12px;color:#a5b4fc}
+.token-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.swatch{width:18px;height:18px;border-radius:4px;flex-shrink:0;border:1px solid rgba(255,255,255,.1)}
+
+/* ── Strategy cards ── */
+.strategy-card{background:var(--doc-surface);border:1px solid var(--doc-border);border-radius:16px;padding:28px;position:relative;overflow:hidden}
+.strategy-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.sc-roze::before{background:linear-gradient(90deg,#f9a8d4,#e879f9)}
+.sc-midnight::before{background:linear-gradient(90deg,#818cf8,#38bdf8)}
+.sc-work::before{background:linear-gradient(90deg,#34d399,#0ea5e9)}
+.sc-campus::before{background:linear-gradient(90deg,#facc15,#a3e635)}
+.strategy-icon{font-size:32px;margin-bottom:16px}
+.strategy-name{font-size:18px;font-weight:700;color:#f1f5f9;margin-bottom:4px}
+.strategy-tagline{font-size:12px;color:var(--doc-muted);margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
+.trait-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.trait-list li{font-size:13px;color:#94a3b8;display:flex;align-items:flex-start;gap:8px}
+.trait-list li::before{content:'—';color:#334155;flex-shrink:0}
+
+/* ── Phone mockup ── */
+.phone-wrap{display:flex;flex-direction:column;align-items:center;gap:20px}
+.phone{width:260px;aspect-ratio:9/19.5;border-radius:36px;overflow:hidden;display:flex;flex-direction:column;flex-shrink:0;box-shadow:0 40px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05)}
+.phone-label{font-size:13px;font-weight:600;color:#94a3b8;text-align:center}
+
+/* ── Component showcase ── */
+.comp-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:12px}
+.comp-label{font-size:11px;color:var(--doc-muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+
+/* ── Table ── */
+.compare-table{width:100%;border-collapse:collapse;font-size:13px}
+.compare-table th{padding:12px 16px;text-align:left;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--doc-muted);border-bottom:1px solid var(--doc-border)}
+.compare-table td{padding:14px 16px;border-bottom:1px solid var(--doc-border);color:#94a3b8;vertical-align:top}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table .theme-col{font-weight:700;color:#f1f5f9}
+.table-wrap{background:var(--doc-surface);border:1px solid var(--doc-border);border-radius:16px;overflow:hidden}
+
+/* ── Do/Don't ── */
+.rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.rule-block{border-radius:12px;padding:20px}
+.rule-do{background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.15)}
+.rule-dont{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.15)}
+.rule-header{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.rule-do .rule-header{color:#34d399}
+.rule-dont .rule-header{color:#f87171}
+.rule-item{font-size:13px;color:#94a3b8;margin-bottom:8px;display:flex;align-items:flex-start;gap:8px}
+.rule-item::before{flex-shrink:0;font-size:11px}
+.rule-do .rule-item::before{content:'✓';color:#34d399}
+.rule-dont .rule-item::before{content:'✕';color:#f87171}
+
+/* ── Code block ── */
+.code{background:#0d0d1a;border:1px solid var(--doc-border);border-radius:12px;padding:24px;font-family:'Space Grotesk',monospace;font-size:12px;line-height:1.8;overflow-x:auto;color:#94a3b8}
+.code .var{color:#818cf8}.code .val{color:#34d399}.code .comment{color:#334155}
+.code .key{color:#f9a8d4}.code .num{color:#fde68a}
+
+/* ── Badge ── */
+.badge{display:inline-flex;align-items:center;gap:6px;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;letter-spacing:.5px}
+.badge-new{background:rgba(99,102,241,.15);color:#a5b4fc;border:1px solid rgba(99,102,241,.2)}
+.badge-rec{background:rgba(52,211,153,.15);color:#34d399;border:1px solid rgba(52,211,153,.2)}
+
+/* ════════════════════════════════════════
+   THEME PREVIEWS — phone internals
+════════════════════════════════════════ */
+
+/* ① ROSÉ JOURNAL */
+.rj{background:#fdf6f9;font-family:'Nunito',sans-serif}
+.rj .bar{background:#fdf6f9;padding:14px 16px 8px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px dashed #f9c6d8}
+.rj .bar-logo{font-size:16px;font-weight:800;color:#be185d}
+.rj .bar-logo em{color:#f472b6;font-style:normal}
+.rj .bar-action{background:linear-gradient(135deg,#f472b6,#c026d3);color:#fff;font-size:10px;font-weight:700;border:none;border-radius:100px;padding:5px 14px}
+.rj .chips{display:flex;gap:6px;padding:8px 14px;overflow-x:auto}
+.rj .chip{flex-shrink:0;font-size:10px;font-weight:700;padding:4px 12px;border-radius:100px;border:1.5px solid #fbb6ce;color:#be185d;background:#fff;white-space:nowrap}
+.rj .chip.on{background:linear-gradient(135deg,#f472b6,#e879f9);border-color:transparent;color:#fff}
+.rj .body{flex:1;overflow:hidden;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.rj .card{background:#fff;border-radius:20px;border:1.5px solid #fce7f3;overflow:hidden;flex-shrink:0;box-shadow:0 4px 16px rgba(244,114,182,.1)}
+.rj .thumb{height:72px;display:flex;align-items:center;justify-content:center;font-size:26px}
+.rj .thumb-a{background:linear-gradient(135deg,#fce7f3,#ede9fe)}
+.rj .thumb-b{background:linear-gradient(135deg,#fef3c7,#fce7f3)}
+.rj .info{padding:8px 12px 10px}
+.rj .cat{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;color:#be185d;background:#fce7f3;border-radius:100px;padding:2px 8px;margin-bottom:5px}
+.rj .title{font-size:11px;font-weight:700;color:#1f2937;line-height:1.4;margin-bottom:3px}
+.rj .sub{font-size:9.5px;color:#9ca3af;line-height:1.5}
+.rj .tags{display:flex;gap:4px;margin-top:5px}
+.rj .tag{font-size:9px;color:#f472b6;font-weight:600}
+.rj .reason{background:#fce7f3;border-radius:10px;padding:4px 8px;margin-top:4px;font-size:9px;color:#be185d;display:flex;align-items:center;gap:3px}
+.rj .nav{background:rgba(253,246,249,.97);border-top:1.5px dashed #fbb6ce;padding:8px 0 6px;display:flex;justify-content:space-around;align-items:flex-end}
+.rj .ni{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:8px;color:#f9a8d4}
+.rj .ni.on{color:#be185d}
+.rj .ni svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rj .fab{width:38px;height:38px;border-radius:50%;margin-top:-16px;background:linear-gradient(135deg,#f472b6,#c026d3);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(244,114,182,.45)}
+.rj .fab svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* ② MIDNIGHT FOCUS */
+.mf{background:#08080f;font-family:'Space Grotesk',sans-serif}
+.mf .bar{background:#08080f;padding:14px 16px 8px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #16161f}
+.mf .bar-logo{font-size:15px;font-weight:700;color:#e2e8f0;letter-spacing:-0.5px}
+.mf .bar-logo em{color:#818cf8;font-style:normal}
+.mf .bar-action{background:transparent;color:#818cf8;font-size:10px;font-weight:600;border:1px solid #3730a3;border-radius:4px;padding:4px 12px}
+.mf .chips{display:flex;gap:4px;padding:8px 14px;overflow-x:auto}
+.mf .chip{flex-shrink:0;font-size:9.5px;font-weight:600;padding:4px 10px;border-radius:4px;background:#16161f;color:#52525b;border:1px solid #27272a;white-space:nowrap;letter-spacing:.5px;text-transform:uppercase}
+.mf .chip.on{background:#1e1b4b;color:#818cf8;border-color:#3730a3}
+.mf .body{flex:1;overflow:hidden;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.mf .card{background:#111118;border-radius:6px;border:1px solid #1e1e2e;overflow:hidden;flex-shrink:0}
+.mf .thumb{height:68px;display:flex;align-items:center;justify-content:center;position:relative}
+.mf .thumb-a{background:#0d0d1a;border-bottom:1px solid #1e1e2e}
+.mf .thumb-b{background:#0a0a0f;border-bottom:1px solid #1e1e2e}
+.mf .thumb-ico{width:28px;height:28px;stroke:#3730a3;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.mf .info{padding:8px 10px 10px}
+.mf .cat{display:inline-flex;align-items:center;gap:3px;font-size:8.5px;font-weight:600;color:#6366f1;background:#1e1b4b;border-radius:3px;padding:1px 6px;margin-bottom:5px;letter-spacing:1px;text-transform:uppercase}
+.mf .title{font-size:11px;font-weight:600;color:#f4f4f5;line-height:1.35;margin-bottom:3px;letter-spacing:-.2px}
+.mf .sub{font-size:9.5px;color:#3f3f46;line-height:1.5}
+.mf .tags{display:flex;gap:6px;margin-top:5px}
+.mf .tag{font-size:9px;color:#27272a;font-family:monospace}
+.mf .reason{background:#16161f;border-left:2px solid #3730a3;padding:4px 8px;margin-top:5px;font-size:9px;color:#818cf8}
+.mf .nav{background:#08080f;border-top:1px solid #16161f;padding:8px 0 6px;display:flex;justify-content:space-around;align-items:flex-end}
+.mf .ni{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:8px;color:#27272a;letter-spacing:.5px;text-transform:uppercase}
+.mf .ni.on{color:#818cf8}
+.mf .ni svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.mf .fab{width:36px;height:36px;border-radius:4px;margin-top:-14px;background:#1e1b4b;border:1px solid #3730a3;display:flex;align-items:center;justify-content:center}
+.mf .fab svg{width:14px;height:14px;stroke:#818cf8;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ③ WORKDAY MINIMAL */
+.wm{background:#f9fafb;font-family:'Instrument Sans',sans-serif}
+.wm .bar{background:#fff;padding:14px 16px 8px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f1f5f9}
+.wm .bar-logo{font-size:15px;font-weight:700;color:#0f172a;letter-spacing:-.3px}
+.wm .bar-logo em{color:#0284c7;font-style:normal}
+.wm .bar-action{background:#0284c7;color:#fff;font-size:10px;font-weight:600;border:none;border-radius:6px;padding:5px 12px}
+.wm .tabs-row{display:flex;background:#fff;border-bottom:1px solid #f1f5f9}
+.wm .tab{flex-shrink:0;font-size:10.5px;font-weight:600;padding:9px 12px;color:#94a3b8;border-bottom:2px solid transparent;white-space:nowrap}
+.wm .tab.on{color:#0284c7;border-bottom-color:#0284c7}
+.wm .body{flex:1;overflow:hidden;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.wm .card{background:#fff;border-radius:8px;border:1px solid #f1f5f9;overflow:hidden;flex-shrink:0;box-shadow:0 1px 4px rgba(15,23,42,.04)}
+.wm .thumb{height:66px;display:flex;align-items:center;justify-content:center}
+.wm .thumb-a{background:#f0f9ff}
+.wm .thumb-b{background:#f0fdf4}
+.wm .thumb-ico{width:26px;height:26px;stroke:#0284c7;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;opacity:.7}
+.wm .info{padding:8px 11px 10px}
+.wm .cat{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:600;color:#0284c7;background:#f0f9ff;border-radius:4px;padding:2px 7px;margin-bottom:5px}
+.wm .title{font-size:11px;font-weight:600;color:#0f172a;line-height:1.35;margin-bottom:3px}
+.wm .sub{font-size:9.5px;color:#64748b;line-height:1.5}
+.wm .tags{display:flex;gap:5px;margin-top:5px}
+.wm .tag{font-size:9px;color:#cbd5e1}
+.wm .reason{background:#f0f9ff;border-radius:5px;padding:4px 8px;margin-top:5px;font-size:9px;color:#0284c7;display:flex;align-items:center;gap:3px}
+.wm .nav{background:#fff;border-top:1px solid #f1f5f9;padding:8px 0 6px;display:flex;justify-content:space-around;align-items:flex-end}
+.wm .ni{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:8px;color:#cbd5e1}
+.wm .ni.on{color:#0284c7}
+.wm .ni svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.wm .fab{width:36px;height:36px;border-radius:7px;margin-top:-14px;background:#0284c7;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(2,132,199,.3)}
+.wm .fab svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* ④ CAMPUS FRESH */
+.cf{background:#fffef5;font-family:'Syne','DM Sans',sans-serif}
+.cf .bar{background:#fffef5;padding:14px 16px 8px;display:flex;justify-content:space-between;align-items:center}
+.cf .bar-logo{font-size:18px;font-weight:800;color:#1a1a1a;letter-spacing:-1px}
+.cf .bar-logo em{color:#84cc16;font-style:normal}
+.cf .bar-action{background:#1a1a1a;color:#d9f99d;font-size:10px;font-weight:800;border:none;border-radius:100px;padding:5px 14px;letter-spacing:.5px}
+.cf .chips{display:flex;gap:6px;padding:6px 14px;overflow-x:auto}
+.cf .chip{flex-shrink:0;font-size:10px;font-weight:800;padding:5px 12px;border-radius:8px;border:2px solid #e5e7eb;color:#9ca3af;background:#fff;white-space:nowrap}
+.cf .chip.on{background:#d9f99d;border-color:#84cc16;color:#1a1a1a;box-shadow:2px 2px 0 #84cc16}
+.cf .body{flex:1;overflow:hidden;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.cf .card{background:#fff;border-radius:14px;border:2px solid #1a1a1a;overflow:hidden;flex-shrink:0;box-shadow:3px 3px 0 #1a1a1a}
+.cf .thumb{height:70px;display:flex;align-items:center;justify-content:center;border-bottom:2px solid #1a1a1a}
+.cf .thumb-a{background:#d9f99d}
+.cf .thumb-b{background:#fef08a}
+.cf .thumb-ico{width:26px;height:26px;stroke:#1a1a1a;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.cf .info{padding:8px 11px 10px}
+.cf .cat{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:800;color:#1a1a1a;background:#d9f99d;border:1.5px solid #1a1a1a;border-radius:6px;padding:2px 7px;margin-bottom:5px}
+.cf .title{font-size:11px;font-weight:700;color:#1a1a1a;line-height:1.35;margin-bottom:3px}
+.cf .sub{font-size:9.5px;color:#6b7280;line-height:1.5}
+.cf .tags{display:flex;gap:5px;margin-top:5px}
+.cf .tag{font-size:9px;color:#84cc16;font-weight:700}
+.cf .reason{background:#d9f99d;border:1.5px solid #1a1a1a;border-radius:8px;padding:4px 8px;margin-top:5px;font-size:9px;color:#1a1a1a;font-weight:700;display:flex;align-items:center;gap:3px}
+.cf .nav{background:#fffef5;border-top:2px solid #1a1a1a;padding:8px 0 6px;display:flex;justify-content:space-around;align-items:flex-end}
+.cf .ni{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:8px;color:#d1d5db;font-weight:700}
+.cf .ni.on{color:#1a1a1a}
+.cf .ni svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.cf .fab{width:40px;height:40px;border-radius:50%;margin-top:-18px;background:#d9f99d;border:2px solid #1a1a1a;display:flex;align-items:center;justify-content:center;box-shadow:2px 2px 0 #1a1a1a}
+.cf .fab svg{width:15px;height:15px;stroke:#1a1a1a;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* nav icons via inline SVG strings */
+.ico{display:flex;align-items:center;justify-content:center}
+
+/* pill progress */
+.pill-row{display:flex;gap:8px;align-items:center;margin-top:8px}
+.pill{height:4px;border-radius:100px;background:#1e1e2e;flex:1}
+.pill.on{background:var(--doc-accent)}
+
+/* Tag colors */
+.tc-roze{color:#f472b6}
+.tc-mid{color:#818cf8}
+.tc-work{color:#0284c7}
+.tc-camp{color:#84cc16}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ HERO ══════════════ -->
+<div class="hero">
+  <div class="container">
+    <div style="display:flex;justify-content:center;gap:8px;margin-bottom:20px;flex-wrap:wrap">
+      <span class="badge badge-new">Design System v1.0</span>
+      <span class="badge badge-rec">4 Themes · Implementation-Ready</span>
+    </div>
+    <h1 class="doc-title">나중이 Design System</h1>
+    <p class="doc-subtitle">Rosé Journal · Midnight Focus · Workday Minimal · Campus Fresh</p>
+    <div class="pill-row" style="max-width:400px;margin:24px auto 0">
+      <div class="pill on"></div><div class="pill on"></div><div class="pill on"></div><div class="pill on"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SECTION 1: STRATEGY ══════════════ -->
+<div class="section">
+  <div class="container">
+    <div class="section-title">01 — Overall Strategy</div>
+    <div class="grid-2" style="margin-bottom:40px">
+      <div>
+        <h2 class="h2">Beyond Color Swaps</h2>
+        <p class="body-text" style="margin-top:12px">Each theme must feel like a completely different product made for a different person — not the same app painted differently. Differentiation happens across five axes: <strong style="color:#e2e8f0">typography personality</strong>, <strong style="color:#e2e8f0">border radius language</strong>, <strong style="color:#e2e8f0">icon weight &amp; style</strong>, <strong style="color:#e2e8f0">spacing density</strong>, and <strong style="color:#e2e8f0">shadow/surface behavior</strong>.</p>
+      </div>
+      <div>
+        <h2 class="h2">Common Foundation</h2>
+        <p class="body-text" style="margin-top:12px">Shared semantic tokens keep the codebase maintainable. Every component references <code style="color:#a5b4fc;background:#1e1e2e;padding:2px 6px;border-radius:4px">--color-bg</code>, <code style="color:#a5b4fc;background:#1e1e2e;padding:2px 6px;border-radius:4px">--color-accent</code>, <code style="color:#a5b4fc;background:#1e1e2e;padding:2px 6px;border-radius:4px">--radius-card</code> etc. Theme switching is a single <code style="color:#a5b4fc;background:#1e1e2e;padding:2px 6px;border-radius:4px">data-theme</code> attribute on <code style="color:#a5b4fc;background:#1e1e2e;padding:2px 6px;border-radius:4px">&lt;html&gt;</code>.</p>
+      </div>
+    </div>
+    <div class="grid-4">
+      <div class="strategy-card sc-roze">
+        <div class="strategy-icon">🌸</div>
+        <div class="strategy-name">Rosé Journal</div>
+        <div class="strategy-tagline">Soft · Warm · Personal</div>
+        <ul class="trait-list">
+          <li>Rounded-everything: cards, chips, FAB</li>
+          <li>Serif accent in logo (Fraunces)</li>
+          <li>Dashed borders as dividers</li>
+          <li>Gradient-filled buttons &amp; FAB</li>
+          <li>Warm pink/lavender palette</li>
+          <li>High border-radius (20-28px cards)</li>
+          <li>Outlined icons, lighter weight</li>
+        </ul>
+      </div>
+      <div class="strategy-card sc-midnight">
+        <div class="strategy-icon">🌑</div>
+        <div class="strategy-name">Midnight Focus</div>
+        <div class="strategy-tagline">Sharp · Dense · Precise</div>
+        <ul class="trait-list">
+          <li>Near-zero border radius (4-6px)</li>
+          <li>Monospace type accent (Space Grotesk)</li>
+          <li>Left-border accents instead of chips</li>
+          <li>Ghost / outlined buttons only</li>
+          <li>Deep navy/indigo on black</li>
+          <li>High info density, tight spacing</li>
+          <li>Thin stroke icons (1.5px)</li>
+        </ul>
+      </div>
+      <div class="strategy-card sc-work">
+        <div class="strategy-icon">💼</div>
+        <div class="strategy-name">Workday Minimal</div>
+        <div class="strategy-tagline">Clean · Structured · Reliable</div>
+        <ul class="trait-list">
+          <li>Underline tabs (not pill tabs)</li>
+          <li>Instrument Sans — neutral, legible</li>
+          <li>White backgrounds, 1px dividers</li>
+          <li>Flat buttons, no gradients</li>
+          <li>Sky blue + neutral grays</li>
+          <li>Medium radius (8px)</li>
+          <li>Standard stroke icons (1.75px)</li>
+        </ul>
+      </div>
+      <div class="strategy-card sc-campus">
+        <div class="strategy-icon">⚡</div>
+        <div class="strategy-name">Campus Fresh</div>
+        <div class="strategy-tagline">Bold · Graphic · Energetic</div>
+        <ul class="trait-list">
+          <li>Hard shadow (offset box-shadow)</li>
+          <li>Syne — ultra-bold display font</li>
+          <li>2px dark borders on everything</li>
+          <li>Lime green + black neo-brutalism</li>
+          <li>Mixed radius (14px cards, pill chips)</li>
+          <li>Bold stroke icons (2.5px)</li>
+          <li>High contrast, saturated color</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SECTION 2: PHONE PREVIEWS ══════════════ -->
+<div class="section" style="background:var(--doc-surface)">
+  <div class="container">
+    <div class="section-title">02 — Theme Previews</div>
+    <div class="grid-4">
+
+      <!-- ROSÉ JOURNAL -->
+      <div class="phone-wrap">
+        <div class="phone rj">
+          <div class="bar">
+            <div class="bar-logo">나<em>중</em>이</div>
+            <button class="bar-action">＋ 저장</button>
+          </div>
+          <div class="chips">
+            <div class="chip on">전체</div>
+            <div class="chip">영상</div>
+            <div class="chip">레시피</div>
+            <div class="chip">여행</div>
+          </div>
+          <div class="body">
+            <div class="card">
+              <div class="thumb thumb-a">🍝</div>
+              <div class="info">
+                <div class="cat">레시피</div>
+                <div class="title">크림파스타 — 집에서 레스토랑처럼</div>
+                <div class="sub">생크림과 베이컨으로 20분 완성</div>
+                <div class="reason">💡 파스타 검색과 관련</div>
+                <div class="tags"><span class="tag">#파스타</span><span class="tag">#홈쿡</span></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="thumb thumb-b">🛍️</div>
+              <div class="info">
+                <div class="cat">쇼핑</div>
+                <div class="title">무신사 봄 신상 — 이번 시즌 픽</div>
+                <div class="sub">트렌디한 봄 아이템 코디 가이드</div>
+                <div class="tags"><span class="tag">#패션</span><span class="tag">#봄코디</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="nav">
+            <div class="ni on">
+              <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+              홈
+            </div>
+            <div class="ni">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              검색
+            </div>
+            <div class="ni">
+              <div class="fab"><svg viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></svg></div>
+              저장
+            </div>
+            <div class="ni">
+              <svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+              분류
+            </div>
+            <div class="ni">
+              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              설정
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">🌸 Rosé Journal</div>
+      </div>
+
+      <!-- MIDNIGHT FOCUS -->
+      <div class="phone-wrap">
+        <div class="phone mf">
+          <div class="bar">
+            <div class="bar-logo">나<em>중</em>이</div>
+            <button class="bar-action">+ SAVE</button>
+          </div>
+          <div class="chips">
+            <div class="chip on">ALL</div>
+            <div class="chip">DEV</div>
+            <div class="chip">VIDEO</div>
+            <div class="chip">NEWS</div>
+          </div>
+          <div class="body">
+            <div class="card">
+              <div class="thumb thumb-a">
+                <svg class="thumb-ico" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <div class="info">
+                <div class="cat">개발</div>
+                <div class="title">React 19 — Server Actions 완전 정리</div>
+                <div class="sub">Next.js App Router 실전 패턴 모음</div>
+                <div class="reason">⚡ 리액트 검색과 매칭</div>
+                <div class="tags"><span class="tag">#react</span><span class="tag">#frontend</span></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="thumb thumb-b">
+                <svg class="thumb-ico" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              </div>
+              <div class="info">
+                <div class="cat">영상</div>
+                <div class="title">Fireship — Every JS Framework Explained</div>
+                <div class="sub">100초로 정리하는 프레임워크 비교</div>
+                <div class="tags"><span class="tag">#javascript</span><span class="tag">#youtube</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="nav">
+            <div class="ni on">
+              <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+              HOME
+            </div>
+            <div class="ni">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              SEARCH
+            </div>
+            <div class="ni">
+              <div class="fab"><svg viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></svg></div>
+              NEW
+            </div>
+            <div class="ni">
+              <svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+              SORT
+            </div>
+            <div class="ni">
+              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              USER
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">🌑 Midnight Focus</div>
+      </div>
+
+      <!-- WORKDAY MINIMAL -->
+      <div class="phone-wrap">
+        <div class="phone wm">
+          <div class="bar">
+            <div class="bar-logo">나<em>중</em>이</div>
+            <button class="bar-action">저장하기</button>
+          </div>
+          <div class="tabs-row">
+            <div class="tab on">전체</div>
+            <div class="tab">비즈니스</div>
+            <div class="tab">뉴스</div>
+            <div class="tab">교육</div>
+          </div>
+          <div class="body">
+            <div class="card">
+              <div class="thumb thumb-a">
+                <svg class="thumb-ico" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <div class="info">
+                <div class="cat">비즈니스</div>
+                <div class="title">2024 마케팅 트렌드 리포트</div>
+                <div class="sub">AI 자동화가 핵심 키워드로 부상</div>
+                <div class="reason">💡 마케팅 검색과 관련됨</div>
+                <div class="tags"><span class="tag">#마케팅</span><span class="tag">#트렌드</span></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="thumb thumb-b">
+                <svg class="thumb-ico" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <div class="info">
+                <div class="cat">교육</div>
+                <div class="title">엑셀 피벗테이블 완벽 마스터</div>
+                <div class="sub">실무에서 바로 쓰는 데이터 분석 스킬</div>
+                <div class="tags"><span class="tag">#엑셀</span><span class="tag">#실무</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="nav">
+            <div class="ni on">
+              <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+              홈
+            </div>
+            <div class="ni">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              검색
+            </div>
+            <div class="ni">
+              <div class="fab"><svg viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></svg></div>
+              저장
+            </div>
+            <div class="ni">
+              <svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+              분류
+            </div>
+            <div class="ni">
+              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              설정
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">💼 Workday Minimal</div>
+      </div>
+
+      <!-- CAMPUS FRESH -->
+      <div class="phone-wrap">
+        <div class="phone cf">
+          <div class="bar">
+            <div class="bar-logo">나<em>중</em>이</div>
+            <button class="bar-action">＋ 저장</button>
+          </div>
+          <div class="chips">
+            <div class="chip on">전체</div>
+            <div class="chip">교육</div>
+            <div class="chip">영상</div>
+            <div class="chip">개발</div>
+          </div>
+          <div class="body">
+            <div class="card">
+              <div class="thumb thumb-a">
+                <svg class="thumb-ico" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+              </div>
+              <div class="info">
+                <div class="cat">교육</div>
+                <div class="title">토익 900점 — 3개월 공부법</div>
+                <div class="sub">파트별 전략과 추천 교재 총정리</div>
+                <div class="reason">🔥 토익 검색과 매칭!</div>
+                <div class="tags"><span class="tag">#토익</span><span class="tag">#영어</span></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="thumb thumb-b">
+                <svg class="thumb-ico" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              </div>
+              <div class="info">
+                <div class="cat">개발</div>
+                <div class="title">비전공자 개발자 취업 로드맵 2024</div>
+                <div class="sub">포트폴리오부터 코딩테스트까지</div>
+                <div class="tags"><span class="tag">#취업</span><span class="tag">#개발</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="nav">
+            <div class="ni on">
+              <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+              홈
+            </div>
+            <div class="ni">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              검색
+            </div>
+            <div class="ni">
+              <div class="fab"><svg viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></svg></div>
+              저장
+            </div>
+            <div class="ni">
+              <svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+              분류
+            </div>
+            <div class="ni">
+              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              설정
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">⚡ Campus Fresh</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SECTION 3: PALETTES ══════════════ -->
+<div class="section">
+  <div class="container">
+    <div class="section-title">03 — Color Palettes</div>
+    <div class="grid-4">
+
+      <div class="strategy-card sc-roze">
+        <div class="strategy-name" style="margin-bottom:16px">🌸 Rosé Journal</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#fdf6f9;border:1px solid rgba(255,255,255,.1)"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Background</div><div style="font-size:11px;color:#64748b">#fdf6f9</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#f472b6"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Accent Primary</div><div style="font-size:11px;color:#64748b">#f472b6</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#e879f9"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Accent Secondary</div><div style="font-size:11px;color:#64748b">#e879f9</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#be185d"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Text Accent</div><div style="font-size:11px;color:#64748b">#be185d</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#fce7f3;border:1px solid rgba(255,255,255,.05)"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Surface</div><div style="font-size:11px;color:#64748b">#fce7f3</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#fbb6ce"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Border / Divider</div><div style="font-size:11px;color:#64748b">#fbb6ce</div></div></div>
+        </div>
+      </div>
+
+      <div class="strategy-card sc-midnight">
+        <div class="strategy-name" style="margin-bottom:16px">🌑 Midnight Focus</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#08080f;border:1px solid rgba(255,255,255,.08)"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Background</div><div style="font-size:11px;color:#64748b">#08080f</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#818cf8"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Accent Primary</div><div style="font-size:11px;color:#64748b">#818cf8</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#3730a3"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Accent Muted</div><div style="font-size:11px;color:#64748b">#3730a3</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#38bdf8"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Highlight</div><div style="font-size:11px;color:#64748b">#38bdf8</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#111118;border:1px solid rgba(255,255,255,.05)"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Surface</div><div style="font-size:11px;color:#64748b">#111118</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#1e1e2e;border:1px solid rgba(255,255,255,.05)"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Border</div><div style="font-size:11px;color:#64748b">#1e1e2e</div></div></div>
+        </div>
+      </div>
+
+      <div class="strategy-card sc-work">
+        <div class="strategy-name" style="margin-bottom:16px">💼 Workday Minimal</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#f9fafb;border:1px solid rgba(0,0,0,.08)"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Background</div><div style="font-size:11px;color:#64748b">#f9fafb</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#0284c7"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Accent Primary</div><div style="font-size:11px;color:#64748b">#0284c7</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#0369a1"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Accent Dark</div><div style="font-size:11px;color:#64748b">#0369a1</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#34d399"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Success</div><div style="font-size:11px;color:#64748b">#34d399</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#fff;border:1px solid rgba(0,0,0,.08)"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Surface</div><div style="font-size:11px;color:#64748b">#ffffff</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#f1f5f9;border:1px solid rgba(0,0,0,.05)"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Border</div><div style="font-size:11px;color:#64748b">#f1f5f9</div></div></div>
+        </div>
+      </div>
+
+      <div class="strategy-card sc-campus">
+        <div class="strategy-name" style="margin-bottom:16px">⚡ Campus Fresh</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#fffef5;border:1px solid rgba(0,0,0,.08)"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Background</div><div style="font-size:11px;color:#64748b">#fffef5</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#84cc16"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Accent Primary</div><div style="font-size:11px;color:#64748b">#84cc16</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#d9f99d;border:1px solid rgba(0,0,0,.06)"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Accent Light</div><div style="font-size:11px;color:#64748b">#d9f99d</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#fef08a"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Secondary</div><div style="font-size:11px;color:#64748b">#fef08a</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#fff;border:1px solid rgba(0,0,0,.08)"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Surface</div><div style="font-size:11px;color:#64748b">#ffffff</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:8px;background:#1a1a1a"></div><div><div style="font-size:12px;color:#f1f5f9;font-weight:600">Border / Shadow</div><div style="font-size:11px;color:#64748b">#1a1a1a</div></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SECTION 4: TYPOGRAPHY ══════════════ -->
+<div class="section" style="background:var(--doc-surface)">
+  <div class="container">
+    <div class="section-title">04 — Typography System</div>
+    <div class="grid-4">
+      <div class="strategy-card sc-roze">
+        <div style="font-family:'Nunito',sans-serif;margin-bottom:12px">
+          <div style="font-size:28px;font-weight:800;color:#be185d;line-height:1">나중이</div>
+          <div style="font-size:11px;color:#f9a8d4;margin-top:4px">Nunito 800 — App Logo</div>
+        </div>
+        <div style="font-family:'Nunito',sans-serif;margin-bottom:8px">
+          <div style="font-size:16px;font-weight:700;color:#1f2937">카드 제목이 이렇게</div>
+          <div style="font-size:10px;color:#9ca3af">700 · 16px · letter-spacing: -0.3px</div>
+        </div>
+        <div style="font-family:'Nunito',sans-serif">
+          <div style="font-size:12px;color:#6b7280;line-height:1.6">본문 텍스트는 둥글고 따뜻하게</div>
+          <div style="font-size:10px;color:#9ca3af">400 · 12px · lh: 1.6</div>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed #fbb6ce;font-size:11px;color:#9ca3af">
+          <strong style="color:#f1f5f9">Stack:</strong> Nunito + Noto Sans KR (fallback)
+        </div>
+      </div>
+
+      <div class="strategy-card sc-midnight">
+        <div style="font-family:'Space Grotesk',sans-serif;margin-bottom:12px">
+          <div style="font-size:26px;font-weight:700;color:#818cf8;line-height:1;letter-spacing:-1px">나중이</div>
+          <div style="font-size:11px;color:#3f3f46;margin-top:4px">Space Grotesk 700 — App Logo</div>
+        </div>
+        <div style="font-family:'Space Grotesk',sans-serif;margin-bottom:8px">
+          <div style="font-size:15px;font-weight:600;color:#f4f4f5;letter-spacing:-0.3px">카드 제목이 이렇게</div>
+          <div style="font-size:10px;color:#52525b">600 · 15px · letter-spacing: -0.3px</div>
+        </div>
+        <div style="font-family:'Space Grotesk',sans-serif">
+          <div style="font-size:11.5px;color:#52525b;line-height:1.5">본문은 기술적이고 정밀하게</div>
+          <div style="font-size:10px;color:#3f3f46">400 · 11.5px · lh: 1.5</div>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid #27272a;font-size:11px;color:#3f3f46">
+          <strong style="color:#f1f5f9">Stack:</strong> Space Grotesk + Noto Sans KR
+        </div>
+      </div>
+
+      <div class="strategy-card sc-work">
+        <div style="font-family:'Instrument Sans',sans-serif;margin-bottom:12px">
+          <div style="font-size:24px;font-weight:700;color:#0f172a;line-height:1;letter-spacing:-0.5px">나중이</div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:4px">Instrument Sans 700 — App Logo</div>
+        </div>
+        <div style="font-family:'Instrument Sans',sans-serif;margin-bottom:8px">
+          <div style="font-size:14px;font-weight:600;color:#0f172a">카드 제목이 이렇게</div>
+          <div style="font-size:10px;color:#94a3b8">600 · 14px · normal tracking</div>
+        </div>
+        <div style="font-family:'Instrument Sans',sans-serif">
+          <div style="font-size:12px;color:#64748b;line-height:1.6">본문은 읽기 편하게 중립적으로</div>
+          <div style="font-size:10px;color:#94a3b8">400 · 12px · lh: 1.6</div>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid #f1f5f9;font-size:11px;color:#94a3b8">
+          <strong style="color:#0f172a">Stack:</strong> Instrument Sans + Noto Sans KR
+        </div>
+      </div>
+
+      <div class="strategy-card sc-campus">
+        <div style="font-family:'Syne',sans-serif;margin-bottom:12px">
+          <div style="font-size:28px;font-weight:800;color:#1a1a1a;line-height:1;letter-spacing:-1.5px">나중이</div>
+          <div style="font-size:11px;color:#9ca3af;margin-top:4px">Syne 800 — App Logo</div>
+        </div>
+        <div style="font-family:'Syne',sans-serif;margin-bottom:8px">
+          <div style="font-size:14px;font-weight:700;color:#1a1a1a;letter-spacing:-0.3px">카드 제목이 이렇게</div>
+          <div style="font-size:10px;color:#9ca3af">700 · 14px · letter-spacing: -0.3px</div>
+        </div>
+        <div style="font-family:'DM Sans',sans-serif">
+          <div style="font-size:11.5px;color:#6b7280;line-height:1.5">본문은 DM Sans — 에너지 있게</div>
+          <div style="font-size:10px;color:#9ca3af">DM Sans 400 · 11.5px</div>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:2px solid #e5e7eb;font-size:11px;color:#9ca3af">
+          <strong style="color:#1a1a1a">Stack:</strong> Syne (display) + DM Sans (body)
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SECTION 5: DO / DON'T ══════════════ -->
+<div class="section">
+  <div class="container">
+    <div class="section-title">05 — Do / Don't Rules</div>
+    <div class="grid-2">
+      <div class="rule-grid">
+        <div class="rule-block rule-do">
+          <div class="rule-header">✓ Do — Rosé Journal</div>
+          <div class="rule-item">Dashed borders as section dividers</div>
+          <div class="rule-item">Gradient fill on primary buttons &amp; FAB</div>
+          <div class="rule-item">Pill-shaped chips (border-radius: 100px)</div>
+          <div class="rule-item">Soft box-shadows with pink tint</div>
+          <div class="rule-item">Outlined Lucide icons, stroke-width: 1.75</div>
+        </div>
+        <div class="rule-block rule-dont">
+          <div class="rule-header">✕ Don't — Rosé Journal</div>
+          <div class="rule-item">Sharp corners anywhere in the UI</div>
+          <div class="rule-item">Dark or high-contrast backgrounds</div>
+          <div class="rule-item">Uppercase text labels</div>
+          <div class="rule-item">Flat/ghost buttons as primary CTA</div>
+          <div class="rule-item">Dense, information-heavy layouts</div>
+        </div>
+        <div class="rule-block rule-do">
+          <div class="rule-header">✓ Do — Midnight Focus</div>
+          <div class="rule-item">Left-border accent lines on cards</div>
+          <div class="rule-item">Uppercase + letter-spacing on labels</div>
+          <div class="rule-item">Ghost buttons with thin border</div>
+          <div class="rule-item">Tight spacing — maximize content density</div>
+          <div class="rule-item">Monochrome icons, thin stroke (1.5px)</div>
+        </div>
+        <div class="rule-block rule-dont">
+          <div class="rule-header">✕ Don't — Midnight Focus</div>
+          <div class="rule-item">Rounded cards (> 8px radius)</div>
+          <div class="rule-item">Gradients or colorful fills</div>
+          <div class="rule-item">Emoji as UI elements</div>
+          <div class="rule-item">Bright backgrounds or light mode</div>
+          <div class="rule-item">Multiple accent colors simultaneously</div>
+        </div>
+      </div>
+      <div class="rule-grid">
+        <div class="rule-block rule-do">
+          <div class="rule-header">✓ Do — Workday Minimal</div>
+          <div class="rule-item">Underline tabs (not pill/capsule tabs)</div>
+          <div class="rule-item">1px solid borders, no shadows</div>
+          <div class="rule-item">Flat filled primary button</div>
+          <div class="rule-item">Consistent 8px border-radius</div>
+          <div class="rule-item">White card surfaces on gray background</div>
+        </div>
+        <div class="rule-block rule-dont">
+          <div class="rule-header">✕ Don't — Workday Minimal</div>
+          <div class="rule-item">Gradients or decorative elements</div>
+          <div class="rule-item">Bold or display fonts</div>
+          <div class="rule-item">Pill-shaped components</div>
+          <div class="rule-item">Multiple accent colors or heavy shadows</div>
+          <div class="rule-item">Playful or expressive iconography</div>
+        </div>
+        <div class="rule-block rule-do">
+          <div class="rule-header">✓ Do — Campus Fresh</div>
+          <div class="rule-item">2px dark border on all components</div>
+          <div class="rule-item">Offset box-shadow (3px 3px 0 #1a1a1a)</div>
+          <div class="rule-item">Bold weight on all interactive elements</div>
+          <div class="rule-item">Lime green + yellow as accent pair</div>
+          <div class="rule-item">Heavy icon stroke (2.5px)</div>
+        </div>
+        <div class="rule-block rule-dont">
+          <div class="rule-header">✕ Don't — Campus Fresh</div>
+          <div class="rule-item">Thin, delicate strokes or soft shadows</div>
+          <div class="rule-item">Muted or desaturated color palette</div>
+          <div class="rule-item">Small or subtle typography</div>
+          <div class="rule-item">Light, airy spacing</div>
+          <div class="rule-item">Serif or elegant fonts</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SECTION 6: CSS TOKENS ══════════════ -->
+<div class="section" style="background:var(--doc-surface)">
+  <div class="container">
+    <div class="section-title">06 — Implementation Tokens (CSS Variables)</div>
+    <div class="code">
+<span class="comment">/* ── Common semantic tokens (apply to all themes) ── */</span>
+<span class="var">:root</span> {
+  <span class="comment">/* Spacing scale */</span>
+  <span class="var">--space-1</span>: <span class="num">4px</span>;   <span class="var">--space-2</span>: <span class="num">8px</span>;   <span class="var">--space-3</span>: <span class="num">12px</span>;
+  <span class="var">--space-4</span>: <span class="num">16px</span>;  <span class="var">--space-5</span>: <span class="num">20px</span>;  <span class="var">--space-6</span>: <span class="num">24px</span>;
+
+  <span class="comment">/* Motion */</span>
+  <span class="var">--ease-spring</span>: <span class="val">cubic-bezier(0.34, 1.56, 0.64, 1)</span>;
+  <span class="var">--ease-out</span>:    <span class="val">cubic-bezier(0.16, 1, 0.3, 1)</span>;
+  <span class="var">--duration-fast</span>: <span class="num">120ms</span>;
+  <span class="var">--duration-base</span>: <span class="num">200ms</span>;
+}
+
+<span class="comment">/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */</span>
+<span class="comment">/* 🌸 ROSÉ JOURNAL                                  */</span>
+<span class="comment">/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */</span>
+[<span class="var">data-theme</span>=<span class="val">"roze"</span>] {
+  <span class="comment">/* Colors */</span>
+  <span class="var">--color-bg</span>:         <span class="val">#fdf6f9</span>;
+  <span class="var">--color-surface</span>:    <span class="val">#ffffff</span>;
+  <span class="var">--color-surface-2</span>:  <span class="val">#fce7f3</span>;
+  <span class="var">--color-border</span>:     <span class="val">#fbb6ce</span>;
+  <span class="var">--color-accent</span>:     <span class="val">#f472b6</span>;
+  <span class="var">--color-accent-2</span>:   <span class="val">#e879f9</span>;
+  <span class="var">--color-accent-deep</span>:<span class="val">#be185d</span>;
+  <span class="var">--color-text</span>:       <span class="val">#1f2937</span>;
+  <span class="var">--color-text-muted</span>: <span class="val">#9ca3af</span>;
+  <span class="var">--color-tag</span>:        <span class="val">#f472b6</span>;
+
+  <span class="comment">/* Geometry */</span>
+  <span class="var">--radius-sm</span>:   <span class="num">12px</span>;
+  <span class="var">--radius-md</span>:   <span class="num">20px</span>;
+  <span class="var">--radius-lg</span>:   <span class="num">28px</span>;
+  <span class="var">--radius-pill</span>: <span class="num">100px</span>;
+  <span class="var">--radius-chip</span>: <span class="num">100px</span>;
+  <span class="var">--radius-btn</span>:  <span class="num">100px</span>;
+  <span class="var">--radius-fab</span>:  <span class="num">50%</span>;
+
+  <span class="comment">/* Borders */</span>
+  <span class="var">--border-width</span>: <span class="num">1.5px</span>;
+  <span class="var">--border-style</span>: <span class="val">dashed</span>;  <span class="comment">/* dividers only */</span>
+  <span class="var">--border-card</span>:  <span class="val">1.5px solid #fce7f3</span>;
+
+  <span class="comment">/* Shadows */</span>
+  <span class="var">--shadow-card</span>: <span class="val">0 4px 20px rgba(244,114,182,0.10)</span>;
+  <span class="var">--shadow-fab</span>:  <span class="val">0 8px 24px rgba(244,114,182,0.45)</span>;
+  <span class="var">--shadow-btn</span>:  <span class="val">0 4px 14px rgba(244,114,182,0.35)</span>;
+
+  <span class="comment">/* Button gradient */</span>
+  <span class="var">--btn-primary-bg</span>: <span class="val">linear-gradient(135deg, #f472b6, #e879f9)</span>;
+  <span class="var">--btn-primary-fg</span>: <span class="val">#ffffff</span>;
+
+  <span class="comment">/* Typography */</span>
+  <span class="var">--font-display</span>: <span class="val">'Nunito', 'Noto Sans KR', sans-serif</span>;
+  <span class="var">--font-body</span>:    <span class="val">'Nunito', 'Noto Sans KR', sans-serif</span>;
+  <span class="var">--fw-logo</span>:    <span class="num">800</span>;
+  <span class="var">--fw-title</span>:   <span class="num">700</span>;
+  <span class="var">--fw-body</span>:    <span class="num">400</span>;
+  <span class="var">--icon-stroke</span>: <span class="num">1.75</span>;
+
+  <span class="comment">/* Nav divider style */</span>
+  <span class="var">--nav-divider</span>: <span class="val">1.5px dashed #fbb6ce</span>;
+}
+
+<span class="comment">/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */</span>
+<span class="comment">/* 🌑 MIDNIGHT FOCUS                                */</span>
+<span class="comment">/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */</span>
+[<span class="var">data-theme</span>=<span class="val">"midnight"</span>] {
+  <span class="var">--color-bg</span>:         <span class="val">#08080f</span>;
+  <span class="var">--color-surface</span>:    <span class="val">#111118</span>;
+  <span class="var">--color-surface-2</span>:  <span class="val">#16161f</span>;
+  <span class="var">--color-border</span>:     <span class="val">#1e1e2e</span>;
+  <span class="var">--color-accent</span>:     <span class="val">#818cf8</span>;
+  <span class="var">--color-accent-2</span>:   <span class="val">#38bdf8</span>;
+  <span class="var">--color-accent-deep</span>:<span class="val">#3730a3</span>;
+  <span class="var">--color-text</span>:       <span class="val">#f4f4f5</span>;
+  <span class="var">--color-text-muted</span>: <span class="val">#52525b</span>;
+  <span class="var">--color-tag</span>:        <span class="val">#3f3f46</span>;
+
+  <span class="var">--radius-sm</span>:   <span class="num">3px</span>;
+  <span class="var">--radius-md</span>:   <span class="num">6px</span>;
+  <span class="var">--radius-lg</span>:   <span class="num">8px</span>;
+  <span class="var">--radius-pill</span>: <span class="num">4px</span>;
+  <span class="var">--radius-chip</span>: <span class="num">4px</span>;
+  <span class="var">--radius-btn</span>:  <span class="num">4px</span>;
+  <span class="var">--radius-fab</span>:  <span class="num">4px</span>;
+
+  <span class="var">--border-width</span>: <span class="num">1px</span>;
+  <span class="var">--border-style</span>: <span class="val">solid</span>;
+  <span class="var">--border-card</span>:  <span class="val">1px solid #1e1e2e</span>;
+
+  <span class="var">--shadow-card</span>: <span class="val">none</span>;
+  <span class="var">--shadow-fab</span>:  <span class="val">none</span>;
+  <span class="var">--shadow-btn</span>:  <span class="val">none</span>;
+
+  <span class="var">--btn-primary-bg</span>: <span class="val">transparent</span>;
+  <span class="var">--btn-primary-fg</span>: <span class="val">#818cf8</span>;
+  <span class="var">--btn-primary-border</span>: <span class="val">1px solid #3730a3</span>;
+
+  <span class="var">--font-display</span>: <span class="val">'Space Grotesk', 'Noto Sans KR', sans-serif</span>;
+  <span class="var">--font-body</span>:    <span class="val">'Space Grotesk', 'Noto Sans KR', sans-serif</span>;
+  <span class="var">--fw-logo</span>:    <span class="num">700</span>;
+  <span class="var">--fw-title</span>:   <span class="num">600</span>;
+  <span class="var">--fw-body</span>:    <span class="num">400</span>;
+  <span class="var">--icon-stroke</span>: <span class="num">1.5</span>;
+
+  <span class="var">--nav-divider</span>: <span class="val">1px solid #16161f</span>;
+}
+
+<span class="comment">/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */</span>
+<span class="comment">/* 💼 WORKDAY MINIMAL                               */</span>
+<span class="comment">/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */</span>
+[<span class="var">data-theme</span>=<span class="val">"workday"</span>] {
+  <span class="var">--color-bg</span>:         <span class="val">#f9fafb</span>;
+  <span class="var">--color-surface</span>:    <span class="val">#ffffff</span>;
+  <span class="var">--color-surface-2</span>:  <span class="val">#f0f9ff</span>;
+  <span class="var">--color-border</span>:     <span class="val">#f1f5f9</span>;
+  <span class="var">--color-accent</span>:     <span class="val">#0284c7</span>;
+  <span class="var">--color-accent-2</span>:   <span class="val">#34d399</span>;
+  <span class="var">--color-accent-deep</span>:<span class="val">#0369a1</span>;
+  <span class="var">--color-text</span>:       <span class="val">#0f172a</span>;
+  <span class="var">--color-text-muted</span>: <span class="val">#64748b</span>;
+  <span class="var">--color-tag</span>:        <span class="val">#cbd5e1</span>;
+
+  <span class="var">--radius-sm</span>:   <span class="num">4px</span>;
+  <span class="var">--radius-md</span>:   <span class="num">8px</span>;
+  <span class="var">--radius-lg</span>:   <span class="num">10px</span>;
+  <span class="var">--radius-pill</span>: <span class="num">6px</span>;
+  <span class="var">--radius-chip</span>: <span class="num">4px</span>;
+  <span class="var">--radius-btn</span>:  <span class="num">6px</span>;
+  <span class="var">--radius-fab</span>:  <span class="num">8px</span>;
+
+  <span class="var">--border-width</span>: <span class="num">1px</span>;
+  <span class="var">--border-style</span>: <span class="val">solid</span>;
+  <span class="var">--border-card</span>:  <span class="val">1px solid #f1f5f9</span>;
+
+  <span class="var">--shadow-card</span>: <span class="val">0 1px 4px rgba(15,23,42,0.04)</span>;
+  <span class="var">--shadow-fab</span>:  <span class="val">0 4px 14px rgba(2,132,199,0.28)</span>;
+  <span class="var">--shadow-btn</span>:  <span class="val">none</span>;
+
+  <span class="var">--btn-primary-bg</span>: <span class="val">#0284c7</span>;
+  <span class="var">--btn-primary-fg</span>: <span class="val">#ffffff</span>;
+
+  <span class="var">--font-display</span>: <span class="val">'Instrument Sans', 'Noto Sans KR', sans-serif</span>;
+  <span class="var">--font-body</span>:    <span class="val">'Instrument Sans', 'Noto Sans KR', sans-serif</span>;
+  <span class="var">--fw-logo</span>:    <span class="num">700</span>;
+  <span class="var">--fw-title</span>:   <span class="num">600</span>;
+  <span class="var">--fw-body</span>:    <span class="num">400</span>;
+  <span class="var">--icon-stroke</span>: <span class="num">1.75</span>;
+
+  <span class="var">--nav-divider</span>: <span class="val">1px solid #f1f5f9</span>;
+}
+
+<span class="comment">/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */</span>
+<span class="comment">/* ⚡ CAMPUS FRESH                                  */</span>
+<span class="comment">/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */</span>
+[<span class="var">data-theme</span>=<span class="val">"campus"</span>] {
+  <span class="var">--color-bg</span>:         <span class="val">#fffef5</span>;
+  <span class="var">--color-surface</span>:    <span class="val">#ffffff</span>;
+  <span class="var">--color-surface-2</span>:  <span class="val">#d9f99d</span>;
+  <span class="var">--color-border</span>:     <span class="val">#1a1a1a</span>;
+  <span class="var">--color-accent</span>:     <span class="val">#84cc16</span>;
+  <span class="var">--color-accent-2</span>:   <span class="val">#fef08a</span>;
+  <span class="var">--color-accent-deep</span>:<span class="val">#4d7c0f</span>;
+  <span class="var">--color-text</span>:       <span class="val">#1a1a1a</span>;
+  <span class="var">--color-text-muted</span>: <span class="val">#6b7280</span>;
+  <span class="var">--color-tag</span>:        <span class="val">#84cc16</span>;
+
+  <span class="var">--radius-sm</span>:   <span class="num">6px</span>;
+  <span class="var">--radius-md</span>:   <span class="num">14px</span>;
+  <span class="var">--radius-lg</span>:   <span class="num">16px</span>;
+  <span class="var">--radius-pill</span>: <span class="num">100px</span>;
+  <span class="var">--radius-chip</span>: <span class="num">8px</span>;
+  <span class="var">--radius-btn</span>:  <span class="num">100px</span>;
+  <span class="var">--radius-fab</span>:  <span class="num">50%</span>;
+
+  <span class="var">--border-width</span>: <span class="num">2px</span>;
+  <span class="var">--border-style</span>: <span class="val">solid</span>;
+  <span class="var">--border-card</span>:  <span class="val">2px solid #1a1a1a</span>;
+
+  <span class="var">--shadow-card</span>: <span class="val">3px 3px 0 #1a1a1a</span>;
+  <span class="var">--shadow-fab</span>:  <span class="val">2px 2px 0 #1a1a1a</span>;
+  <span class="var">--shadow-btn</span>:  <span class="val">3px 3px 0 #1a1a1a</span>;
+
+  <span class="var">--btn-primary-bg</span>: <span class="val">#d9f99d</span>;
+  <span class="var">--btn-primary-fg</span>: <span class="val">#1a1a1a</span>;
+
+  <span class="var">--font-display</span>: <span class="val">'Syne', 'Noto Sans KR', sans-serif</span>;
+  <span class="var">--font-body</span>:    <span class="val">'DM Sans', 'Noto Sans KR', sans-serif</span>;
+  <span class="var">--fw-logo</span>:    <span class="num">800</span>;
+  <span class="var">--fw-title</span>:   <span class="num">700</span>;
+  <span class="var">--fw-body</span>:    <span class="num">500</span>;
+  <span class="var">--icon-stroke</span>: <span class="num">2.5</span>;
+
+  <span class="var">--nav-divider</span>: <span class="val">2px solid #1a1a1a</span>;
+}
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SECTION 7: COMPARISON TABLE ══════════════ -->
+<div class="section">
+  <div class="container">
+    <div class="section-title">07 — Comparison Table</div>
+    <div class="table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th class="tc-roze">🌸 Rosé Journal</th>
+            <th class="tc-mid">🌑 Midnight Focus</th>
+            <th class="tc-work">💼 Workday Minimal</th>
+            <th class="tc-camp">⚡ Campus Fresh</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="theme-col">Font Family</td><td>Nunito</td><td>Space Grotesk</td><td>Instrument Sans</td><td>Syne + DM Sans</td></tr>
+          <tr><td class="theme-col">Card Radius</td><td>20px</td><td>6px</td><td>8px</td><td>14px + 2px border</td></tr>
+          <tr><td class="theme-col">Button Shape</td><td>Pill gradient</td><td>Square ghost</td><td>Rect filled</td><td>Pill + offset shadow</td></tr>
+          <tr><td class="theme-col">Tabs Style</td><td>Pill chips</td><td>Square chips (ALL CAPS)</td><td>Underline tabs</td><td>Rect chips + bold</td></tr>
+          <tr><td class="theme-col">Card Shadow</td><td>Soft pink glow</td><td>None</td><td>1px subtle</td><td>3px 3px offset</td></tr>
+          <tr><td class="theme-col">Divider Style</td><td>Dashed pink</td><td>1px solid dark</td><td>1px solid light</td><td>2px solid black</td></tr>
+          <tr><td class="theme-col">Icon Stroke</td><td>1.75px</td><td>1.5px</td><td>1.75px</td><td>2.5px</td></tr>
+          <tr><td class="theme-col">FAB Shape</td><td>Circle</td><td>Square (4px)</td><td>Rounded rect</td><td>Circle + border</td></tr>
+          <tr><td class="theme-col">Spacing Density</td><td>Generous</td><td>Tight</td><td>Medium</td><td>Medium-bold</td></tr>
+          <tr><td class="theme-col">Label Case</td><td>Sentence</td><td>ALL CAPS</td><td>Sentence</td><td>Bold sentence</td></tr>
+          <tr><td class="theme-col">Color Mode</td><td>Light (warm)</td><td>Dark</td><td>Light (cool)</td><td>Light (vivid)</td></tr>
+          <tr><td class="theme-col">Personality Word</td><td>Warm / Cozy</td><td>Sharp / Focused</td><td>Reliable / Clean</td><td>Bold / Energetic</td></tr>
+          <tr><td class="theme-col">Target User</td><td>여성 · 감성 독자</td><td>남성 · 개발자</td><td>직장인 · 비즈니스</td><td>학생 · Z세대</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ SECTION 8: RECOMMENDATION ══════════════ -->
+<div class="section" style="background:var(--doc-surface)">
+  <div class="container">
+    <div class="section-title">08 — Final Recommendation</div>
+    <div class="grid-2">
+      <div class="strategy-card" style="border-color:#6366f1;background:rgba(99,102,241,.05)">
+        <div style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#818cf8;margin-bottom:16px">Default Theme</div>
+        <div style="font-size:24px;font-weight:700;color:#f1f5f9;margin-bottom:8px">💼 Workday Minimal</div>
+        <p style="font-size:14px;color:#64748b;line-height:1.7">가장 넓은 유저베이스에 무난하게 작동합니다. 가독성 최우선 + 성별·연령 중립 → 첫 인상에서 거부감이 없습니다. 온보딩에서 선택하지 않은 유저의 기본값으로 적합.</p>
+      </div>
+      <div class="strategy-card" style="border-color:#34d399;background:rgba(52,211,153,.05)">
+        <div style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#34d399;margin-bottom:16px">Growth Theme</div>
+        <div style="font-size:24px;font-weight:700;color:#f1f5f9;margin-bottom:8px">🌸 Rosé Journal</div>
+        <p style="font-size:14px;color:#64748b;line-height:1.7">바이럴 잠재력이 가장 높습니다. 다꾸·스크랩 커뮤니티에서 SNS 공유 유도 → 앱 스크린샷이 피드에 퍼질 가능성이 큽니다. 가장 강한 브랜드 개성.</p>
+      </div>
+    </div>
+    <div style="margin-top:24px;background:#111;border:1px solid var(--doc-border);border-radius:12px;padding:20px">
+      <div style="font-size:13px;font-weight:600;color:#818cf8;margin-bottom:12px">Implementation Order</div>
+      <div style="display:flex;gap:0;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 20px;background:#1e1e2e;border-radius:8px;margin:4px">
+          <span style="background:#6366f1;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">1</span>
+          <span style="font-size:13px;color:#94a3b8">CSS 변수 적용</span>
+        </div>
+        <div style="color:#334155;padding:8px 4px;font-size:18px">→</div>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 20px;background:#1e1e2e;border-radius:8px;margin:4px">
+          <span style="background:#6366f1;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">2</span>
+          <span style="font-size:13px;color:#94a3b8">ThemeProvider 구현</span>
+        </div>
+        <div style="color:#334155;padding:8px 4px;font-size:18px">→</div>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 20px;background:#1e1e2e;border-radius:8px;margin:4px">
+          <span style="background:#6366f1;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">3</span>
+          <span style="font-size:13px;color:#94a3b8">온보딩 테마 선택</span>
+        </div>
+        <div style="color:#334155;padding:8px 4px;font-size:18px">→</div>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 20px;background:#1e1e2e;border-radius:8px;margin:4px">
+          <span style="background:#6366f1;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">4</span>
+          <span style="font-size:13px;color:#94a3b8">컴포넌트 CVA 리팩터</span>
+        </div>
+        <div style="color:#334155;padding:8px 4px;font-size:18px">→</div>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 20px;background:#1e1e2e;border-radius:8px;margin:4px">
+          <span style="background:#6366f1;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">5</span>
+          <span style="font-size:13px;color:#94a3b8">설정에서 테마 변경</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

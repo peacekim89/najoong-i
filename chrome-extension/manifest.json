@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "나중이 - 1클릭 저장",
+  "version": "1.0.0",
+  "description": "현재 페이지를 나중이에 1클릭으로 저장합니다",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "나중이에 저장"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": ["activeTab", "storage", "notifications", "contextMenus", "cookies"],
+  "host_permissions": ["https://*/*", "http://*/*"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

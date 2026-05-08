@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>나중이 테마 미리보기</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #111;
+  color: #fff;
+  min-height: 100vh;
+  padding: 32px 24px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.subtitle {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 36px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+/* ── 공통 폰 프레임 ── */
+.phone {
+  border-radius: 36px;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 9/19;
+  position: relative;
+  box-shadow: 0 32px 64px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.theme-label {
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+.theme-label .name { font-size: 16px; font-weight: 700; color: #fff; }
+.theme-label .tag  { font-size: 12px; color: #666; margin-top: 2px; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* THEME 1: 로제 플래너 (여성·파스텔)      */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.roze {
+  background: #fff0f6;
+  font-family: 'Georgia', serif;
+}
+.roze .topbar {
+  background: #fff0f6;
+  padding: 18px 18px 10px;
+  border-bottom: 1px dashed #f9c5d8;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.roze .logo { font-size: 20px; font-weight: 700; color: #be185d; letter-spacing: -0.5px; }
+.roze .logo span { color: #f472b6; }
+.roze .save-btn {
+  background: linear-gradient(135deg, #f472b6, #c026d3);
+  color: #fff; font-size: 11px; font-weight: 600;
+  border: none; border-radius: 20px; padding: 6px 14px; cursor: pointer;
+  box-shadow: 0 4px 12px rgba(244,114,182,0.4);
+}
+.roze .tabs {
+  display: flex; gap: 8px; padding: 10px 14px; overflow-x: auto;
+  background: #fff0f6;
+}
+.roze .tab {
+  flex-shrink: 0; font-size: 11px; padding: 5px 14px;
+  border-radius: 20px; border: 1.5px solid #fbb6ce; color: #be185d;
+  background: #fff; white-space: nowrap;
+}
+.roze .tab.active { background: #f472b6; border-color: #f472b6; color: #fff; }
+.roze .cards { flex: 1; overflow: hidden; padding: 10px 14px; display: flex; flex-direction: column; gap: 10px; }
+.roze .card {
+  background: #fff;
+  border-radius: 18px;
+  border: 1.5px solid #fce7f3;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 2px 12px rgba(244,114,182,0.1);
+}
+.roze .card-thumb { height: 80px; background: linear-gradient(135deg, #fce7f3, #ede9fe); position: relative; }
+.roze .card-thumb-2 { height: 80px; background: linear-gradient(135deg, #fff0f6, #fde8ff); }
+.roze .card-thumb-3 { height: 80px; background: linear-gradient(135deg, #fef3c7, #fde8ff); }
+.roze .sticker {
+  position: absolute; font-size: 28px;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+}
+.roze .card-body { padding: 10px 12px; }
+.roze .card-cat {
+  display: inline-block; font-size: 9px; font-weight: 600;
+  background: #fce7f3; color: #be185d; border-radius: 10px;
+  padding: 2px 8px; margin-bottom: 5px;
+}
+.roze .card-title { font-size: 12px; font-weight: 600; color: #1f2937; line-height: 1.4; margin-bottom: 4px; }
+.roze .card-summary { font-size: 10px; color: #9ca3af; line-height: 1.4; }
+.roze .card-tags { display: flex; gap: 4px; margin-top: 6px; }
+.roze .card-tag { font-size: 9px; color: #f472b6; }
+.roze .bottomnav {
+  background: rgba(255,240,246,0.95); backdrop-filter: blur(12px);
+  border-top: 1.5px dashed #fbb6ce;
+  padding: 10px 0 8px;
+  display: flex; justify-content: space-around;
+}
+.roze .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.roze .nav-icon { font-size: 18px; }
+.roze .nav-label { font-size: 9px; color: #be185d; }
+.roze .nav-label.dim { color: #fbb6ce; }
+.roze .fab {
+  width: 42px; height: 42px; border-radius: 50%; margin-top: -18px;
+  background: linear-gradient(135deg, #f472b6, #c026d3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; box-shadow: 0 6px 20px rgba(244,114,182,0.5);
+}
+.roze .match-reason {
+  background: #fce7f3; border: 1px solid #fbb6ce;
+  border-radius: 8px; padding: 4px 8px; margin-top: 5px;
+  font-size: 9px; color: #be185d; display: flex; align-items: center; gap: 4px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* THEME 2: 다크 스튜디오 (남성·미니멀)   */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.dark-studio {
+  background: #09090b;
+}
+.dark-studio .topbar {
+  background: #09090b;
+  padding: 18px 18px 10px;
+  border-bottom: 1px solid #27272a;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.dark-studio .logo { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -1px; }
+.dark-studio .logo span { color: #818cf8; }
+.dark-studio .save-btn {
+  background: #3730a3; color: #c7d2fe; font-size: 11px; font-weight: 600;
+  border: 1px solid #4338ca; border-radius: 6px; padding: 6px 14px;
+}
+.dark-studio .tabs {
+  display: flex; gap: 6px; padding: 10px 14px;
+  background: #09090b;
+}
+.dark-studio .tab {
+  flex-shrink: 0; font-size: 11px; padding: 4px 12px;
+  border-radius: 4px; background: #18181b; color: #52525b;
+  border: 1px solid #27272a; white-space: nowrap;
+}
+.dark-studio .tab.active { background: #3730a3; color: #c7d2fe; border-color: #4338ca; }
+.dark-studio .cards { flex: 1; overflow: hidden; padding: 10px 14px; display: flex; flex-direction: column; gap: 8px; }
+.dark-studio .card {
+  background: #18181b;
+  border-radius: 8px;
+  border: 1px solid #27272a;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.dark-studio .card-thumb { height: 75px; background: linear-gradient(135deg, #1e1b4b, #312e81); position: relative; }
+.dark-studio .card-thumb-2 { height: 75px; background: linear-gradient(135deg, #1c1917, #292524); }
+.dark-studio .card-thumb-3 { height: 75px; background: linear-gradient(135deg, #18181b, #27272a); }
+.dark-studio .sticker {
+  position: absolute; font-size: 24px;
+  top: 50%; left: 50%; transform: translate(-50%,-50%); opacity: 0.7;
+}
+.dark-studio .card-body { padding: 10px 12px; }
+.dark-studio .card-cat {
+  display: inline-block; font-size: 9px; font-weight: 600;
+  background: #1e1b4b; color: #818cf8; border-radius: 3px;
+  padding: 2px 6px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.dark-studio .card-title { font-size: 12px; font-weight: 700; color: #f4f4f5; line-height: 1.3; margin-bottom: 4px; }
+.dark-studio .card-summary { font-size: 10px; color: #52525b; line-height: 1.4; }
+.dark-studio .card-tags { display: flex; gap: 6px; margin-top: 5px; }
+.dark-studio .card-tag { font-size: 9px; color: #3f3f46; }
+.dark-studio .bottomnav {
+  background: rgba(9,9,11,0.97); border-top: 1px solid #27272a;
+  padding: 10px 0 8px;
+  display: flex; justify-content: space-around;
+}
+.dark-studio .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.dark-studio .nav-icon { font-size: 18px; filter: grayscale(0.5); }
+.dark-studio .nav-label { font-size: 9px; color: #818cf8; }
+.dark-studio .nav-label.dim { color: #3f3f46; }
+.dark-studio .fab {
+  width: 42px; height: 42px; border-radius: 6px; margin-top: -18px;
+  background: #3730a3; border: 1px solid #4338ca;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.dark-studio .match-reason {
+  background: #1e1b4b; border: 1px solid #312e81;
+  border-radius: 4px; padding: 4px 8px; margin-top: 5px;
+  font-size: 9px; color: #818cf8; display: flex; align-items: center; gap: 4px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* THEME 3: 오피스 클린 (직장인·프로)     */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.office {
+  background: #f8fafc;
+}
+.office .topbar {
+  background: #fff;
+  padding: 18px 18px 10px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.office .logo { font-size: 18px; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; }
+.office .logo span { color: #0284c7; }
+.office .save-btn {
+  background: #0284c7; color: #fff; font-size: 11px; font-weight: 600;
+  border: none; border-radius: 6px; padding: 6px 14px;
+}
+.office .tabs {
+  display: flex; gap: 0; padding: 0 14px;
+  background: #fff; border-bottom: 1px solid #e2e8f0;
+}
+.office .tab {
+  flex-shrink: 0; font-size: 11px; padding: 10px 12px;
+  color: #94a3b8; border-bottom: 2px solid transparent; white-space: nowrap;
+}
+.office .tab.active { color: #0284c7; border-bottom-color: #0284c7; font-weight: 600; }
+.office .cards { flex: 1; overflow: hidden; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+.office .card {
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.office .card-thumb { height: 72px; background: linear-gradient(135deg, #dbeafe, #eff6ff); position: relative; }
+.office .card-thumb-2 { height: 72px; background: linear-gradient(135deg, #f0fdf4, #dcfce7); }
+.office .card-thumb-3 { height: 72px; background: linear-gradient(135deg, #fefce8, #fef3c7); }
+.office .sticker {
+  position: absolute; font-size: 22px;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+}
+.office .card-body { padding: 9px 12px; }
+.office .card-cat {
+  display: inline-block; font-size: 9px; font-weight: 600;
+  background: #eff6ff; color: #0284c7; border-radius: 4px;
+  padding: 1px 7px; margin-bottom: 4px;
+}
+.office .card-title { font-size: 12px; font-weight: 600; color: #0f172a; line-height: 1.3; margin-bottom: 3px; }
+.office .card-summary { font-size: 10px; color: #64748b; line-height: 1.4; }
+.office .card-tags { display: flex; gap: 5px; margin-top: 5px; }
+.office .card-tag { font-size: 9px; color: #94a3b8; }
+.office .bottomnav {
+  background: #fff; border-top: 1px solid #e2e8f0;
+  padding: 10px 0 8px;
+  display: flex; justify-content: space-around;
+}
+.office .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.office .nav-icon { font-size: 18px; }
+.office .nav-label { font-size: 9px; color: #0284c7; font-weight: 600; }
+.office .nav-label.dim { color: #cbd5e1; font-weight: 400; }
+.office .fab {
+  width: 42px; height: 42px; border-radius: 8px; margin-top: -18px;
+  background: #0284c7;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; box-shadow: 0 4px 12px rgba(2,132,199,0.35);
+}
+.office .match-reason {
+  background: #eff6ff; border: 1px solid #bae6fd;
+  border-radius: 4px; padding: 4px 8px; margin-top: 5px;
+  font-size: 9px; color: #0284c7; display: flex; align-items: center; gap: 4px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* THEME 4: 캠퍼스 팝 (학생·컬러풀)       */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.campus {
+  background: #fafafa;
+}
+.campus .topbar {
+  background: linear-gradient(135deg, #a3e635, #4ade80);
+  padding: 18px 18px 10px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.campus .logo { font-size: 20px; font-weight: 900; color: #14532d; letter-spacing: -1px; }
+.campus .logo span { color: #fff; }
+.campus .save-btn {
+  background: #14532d; color: #a3e635; font-size: 11px; font-weight: 800;
+  border: none; border-radius: 20px; padding: 6px 14px;
+}
+.campus .tabs {
+  display: flex; gap: 8px; padding: 10px 14px;
+  background: #fafafa;
+}
+.campus .tab {
+  flex-shrink: 0; font-size: 11px; font-weight: 700; padding: 5px 12px;
+  border-radius: 20px; border: 2px solid #e5e7eb; color: #9ca3af;
+  white-space: nowrap;
+}
+.campus .tab.active { background: #facc15; border-color: #facc15; color: #713f12; }
+.campus .cards { flex: 1; overflow: hidden; padding: 10px 14px; display: flex; flex-direction: column; gap: 10px; }
+.campus .card {
+  background: #fff;
+  border-radius: 16px;
+  border: 2.5px solid #e5e7eb;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 3px 3px 0 #e5e7eb;
+}
+.campus .card-thumb { height: 78px; background: linear-gradient(135deg, #d9f99d, #86efac); position: relative; }
+.campus .card-thumb-2 { height: 78px; background: linear-gradient(135deg, #fef08a, #fdba74); }
+.campus .card-thumb-3 { height: 78px; background: linear-gradient(135deg, #bfdbfe, #a5b4fc); }
+.campus .sticker {
+  position: absolute; font-size: 28px;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+}
+.campus .card-body { padding: 9px 12px; }
+.campus .card-cat {
+  display: inline-block; font-size: 9px; font-weight: 800;
+  background: #fef08a; color: #713f12; border-radius: 20px;
+  padding: 2px 8px; margin-bottom: 5px; border: 1.5px solid #fde047;
+}
+.campus .card-title { font-size: 12px; font-weight: 700; color: #111827; line-height: 1.3; margin-bottom: 3px; }
+.campus .card-summary { font-size: 10px; color: #6b7280; line-height: 1.4; }
+.campus .card-tags { display: flex; gap: 5px; margin-top: 5px; }
+.campus .card-tag { font-size: 9px; color: #a3e635; font-weight: 700; }
+.campus .bottomnav {
+  background: #fff; border-top: 2.5px solid #e5e7eb;
+  padding: 10px 0 8px;
+  display: flex; justify-content: space-around;
+}
+.campus .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.campus .nav-icon { font-size: 18px; }
+.campus .nav-label { font-size: 9px; color: #4d7c0f; font-weight: 800; }
+.campus .nav-label.dim { color: #d1d5db; font-weight: 400; }
+.campus .fab {
+  width: 44px; height: 44px; border-radius: 50%; margin-top: -20px;
+  background: #a3e635; border: 2.5px solid #65a30d;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; box-shadow: 3px 3px 0 #65a30d;
+}
+.campus .match-reason {
+  background: #f7fee7; border: 1.5px solid #a3e635;
+  border-radius: 20px; padding: 4px 8px; margin-top: 5px;
+  font-size: 9px; color: #4d7c0f; font-weight: 700;
+  display: flex; align-items: center; gap: 4px;
+}
+</style>
+</head>
+<body>
+
+<h1>나중이 테마 미리보기</h1>
+<p class="subtitle">배포 전 적용할 테마를 골라보세요</p>
+
+<div class="grid">
+
+  <!-- ① 로제 플래너 -->
+  <div>
+    <div class="theme-label">
+      <div class="name">🌸 로제 플래너</div>
+      <div class="tag">여성 · 파스텔 · 다꾸 감성</div>
+    </div>
+    <div class="phone roze">
+      <div class="topbar">
+        <div class="logo">나<span>중</span>이</div>
+        <button class="save-btn">＋ 저장</button>
+      </div>
+      <div class="tabs">
+        <div class="tab active">전체</div>
+        <div class="tab">영상 🎬</div>
+        <div class="tab">레시피 🍳</div>
+        <div class="tab">여행 ✈️</div>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-thumb"><div class="sticker">🍝</div></div>
+          <div class="card-body">
+            <div class="card-cat">레시피</div>
+            <div class="card-title">크림파스타 만드는 법 — 집에서 레스토랑처럼</div>
+            <div class="card-summary">생크림과 베이컨으로 만드는 간단 레시피. 20분이면 완성!</div>
+            <div class="match-reason">💡 파스타 검색과 관련</div>
+            <div class="card-tags"><span class="card-tag">#파스타</span><span class="card-tag">#홈쿡</span><span class="card-tag">#이탈리안</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-thumb-2"><div class="sticker">🛍️</div></div>
+          <div class="card-body">
+            <div class="card-cat">쇼핑</div>
+            <div class="card-title">무신사 봄 신상 하울 — 이번 시즌 픽</div>
+            <div class="card-summary">트렌디한 봄 아이템 모음. 코디하기 쉬운 아이템 위주.</div>
+            <div class="card-tags"><span class="card-tag">#패션</span><span class="card-tag">#봄코디</span><span class="card-tag">#쇼핑</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-thumb-3"><div class="sticker">✈️</div></div>
+          <div class="card-body">
+            <div class="card-cat">여행</div>
+            <div class="card-title">발리 3박 4일 여행 일정 완벽 가이드</div>
+            <div class="card-summary">울루와뚜 사원부터 스미냑 해변까지 핵심 코스 정리.</div>
+            <div class="card-tags"><span class="card-tag">#발리</span><span class="card-tag">#여행</span><span class="card-tag">#인도네시아</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-label">홈</div></div>
+        <div class="nav-item"><div class="nav-icon">🔍</div><div class="nav-label dim">검색</div></div>
+        <div class="nav-item"><div class="fab">＋</div><div class="nav-label dim">저장</div></div>
+        <div class="nav-item"><div class="nav-icon">📂</div><div class="nav-label dim">분류</div></div>
+        <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-label dim">설정</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② 다크 스튜디오 -->
+  <div>
+    <div class="theme-label">
+      <div class="name">🖤 다크 스튜디오</div>
+      <div class="tag">남성 · 미니멀 · 모노크롬</div>
+    </div>
+    <div class="phone dark-studio">
+      <div class="topbar">
+        <div class="logo">나<span>중</span>이</div>
+        <button class="save-btn">+ SAVE</button>
+      </div>
+      <div class="tabs">
+        <div class="tab active">ALL</div>
+        <div class="tab">개발</div>
+        <div class="tab">영상</div>
+        <div class="tab">뉴스</div>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-thumb"><div class="sticker">⚡</div></div>
+          <div class="card-body">
+            <div class="card-cat">개발</div>
+            <div class="card-title">React 19 새로운 기능 완전 정리</div>
+            <div class="card-summary">Server Components와 Actions의 실전 활용법을 다룬다.</div>
+            <div class="match-reason">⚡ 리액트 검색과 매칭</div>
+            <div class="card-tags"><span class="card-tag">#react</span><span class="card-tag">#frontend</span><span class="card-tag">#2024</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-thumb-2"><div class="sticker">🎥</div></div>
+          <div class="card-body">
+            <div class="card-cat">영상</div>
+            <div class="card-title">Fireship — Every JS Framework Explained</div>
+            <div class="card-summary">100초로 정리하는 주요 JS 프레임워크 비교 영상.</div>
+            <div class="card-tags"><span class="card-tag">#javascript</span><span class="card-tag">#youtube</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-thumb-3"><div class="sticker">📰</div></div>
+          <div class="card-body">
+            <div class="card-cat">뉴스</div>
+            <div class="card-title">OpenAI GPT-5 발표 — 무엇이 달라졌나</div>
+            <div class="card-summary">멀티모달 추론 능력 강화, 가격 정책 변화 정리.</div>
+            <div class="card-tags"><span class="card-tag">#AI</span><span class="card-tag">#openai</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-label">홈</div></div>
+        <div class="nav-item"><div class="nav-icon">🔍</div><div class="nav-label dim">검색</div></div>
+        <div class="nav-item"><div class="fab">+</div><div class="nav-label dim">저장</div></div>
+        <div class="nav-item"><div class="nav-icon">📂</div><div class="nav-label dim">분류</div></div>
+        <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-label dim">설정</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ 오피스 클린 -->
+  <div>
+    <div class="theme-label">
+      <div class="name">💼 오피스 클린</div>
+      <div class="tag">직장인 · 프로페셔널 · 깔끔</div>
+    </div>
+    <div class="phone office">
+      <div class="topbar">
+        <div class="logo" style="color:#0f172a;">나<span>중</span>이</div>
+        <button class="save-btn">저장하기</button>
+      </div>
+      <div class="tabs">
+        <div class="tab active">전체</div>
+        <div class="tab">비즈니스</div>
+        <div class="tab">뉴스</div>
+        <div class="tab">교육</div>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-thumb"><div class="sticker">📊</div></div>
+          <div class="card-body">
+            <div class="card-cat">비즈니스</div>
+            <div class="card-title">2024 마케팅 트렌드 리포트 — 필독</div>
+            <div class="card-summary">데이터 기반 마케팅과 AI 자동화가 핵심 키워드로 부상.</div>
+            <div class="match-reason">💡 마케팅 검색과 관련됨</div>
+            <div class="card-tags"><span class="card-tag">#마케팅</span><span class="card-tag">#리포트</span><span class="card-tag">#트렌드</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-thumb-2"><div class="sticker">📈</div></div>
+          <div class="card-body">
+            <div class="card-cat">교육</div>
+            <div class="card-title">엑셀 피벗테이블 완벽 마스터 강의</div>
+            <div class="card-summary">실무에서 바로 쓰는 데이터 분석 스킬. 총 2시간 분량.</div>
+            <div class="card-tags"><span class="card-tag">#엑셀</span><span class="card-tag">#실무</span><span class="card-tag">#데이터</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-thumb-3"><div class="sticker">📰</div></div>
+          <div class="card-body">
+            <div class="card-cat">뉴스</div>
+            <div class="card-title">한국 스타트업 투자 동향 — 1분기 결산</div>
+            <div class="card-summary">VC 투자 위축 속 AI·헬스케어 분야는 성장세 유지.</div>
+            <div class="card-tags"><span class="card-tag">#스타트업</span><span class="card-tag">#투자</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-label">홈</div></div>
+        <div class="nav-item"><div class="nav-icon">🔍</div><div class="nav-label dim">검색</div></div>
+        <div class="nav-item"><div class="fab">＋</div><div class="nav-label dim">저장</div></div>
+        <div class="nav-item"><div class="nav-icon">📂</div><div class="nav-label dim">분류</div></div>
+        <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-label dim">설정</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ 캠퍼스 팝 -->
+  <div>
+    <div class="theme-label">
+      <div class="name">🎓 캠퍼스 팝</div>
+      <div class="tag">학생 · 컬러풀 · 에너지</div>
+    </div>
+    <div class="phone campus">
+      <div class="topbar">
+        <div class="logo">나<span>중</span>이</div>
+        <button class="save-btn">＋ 저장!</button>
+      </div>
+      <div class="tabs">
+        <div class="tab active">전체 🔥</div>
+        <div class="tab">교육 📚</div>
+        <div class="tab">영상 🎬</div>
+        <div class="tab">개발 💻</div>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-thumb"><div class="sticker">📚</div></div>
+          <div class="card-body">
+            <div class="card-cat">교육</div>
+            <div class="card-title">토익 900점 달성 후기 — 3개월 공부법</div>
+            <div class="card-summary">파트별 전략과 추천 교재 총정리. 직장인도 가능!</div>
+            <div class="match-reason">🔥 토익 검색과 매칭!</div>
+            <div class="card-tags"><span class="card-tag">#토익</span><span class="card-tag">#영어</span><span class="card-tag">#공부</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-thumb-2"><div class="sticker">🎮</div></div>
+          <div class="card-body">
+            <div class="card-cat">엔터테인먼트</div>
+            <div class="card-title">요즘 대학생들 사이 핫한 보드게임 TOP 10</div>
+            <div class="card-summary">소모임·MT에서 활약하는 인기 보드게임 랭킹.</div>
+            <div class="card-tags"><span class="card-tag">#보드게임</span><span class="card-tag">#대학생</span><span class="card-tag">#추천</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-thumb-3"><div class="sticker">💻</div></div>
+          <div class="card-body">
+            <div class="card-cat">개발</div>
+            <div class="card-title">비전공자 개발자 취업 로드맵 2024</div>
+            <div class="card-summary">포트폴리오부터 코딩테스트까지 단계별 가이드.</div>
+            <div class="card-tags"><span class="card-tag">#취업</span><span class="card-tag">#개발</span><span class="card-tag">#부트캠프</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-label">홈</div></div>
+        <div class="nav-item"><div class="nav-icon">🔍</div><div class="nav-label dim">검색</div></div>
+        <div class="nav-item"><div class="fab">＋</div><div class="nav-label dim">저장</div></div>
+        <div class="nav-item"><div class="nav-icon">📂</div><div class="nav-label dim">분류</div></div>
+        <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-label dim">설정</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
