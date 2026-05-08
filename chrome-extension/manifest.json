@@ -3,9 +3,19 @@
   "name": "나중이 - 1클릭 저장",
   "version": "1.0.0",
   "description": "현재 페이지를 나중이에 1클릭으로 저장합니다",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "나중이에 저장"
+    "default_title": "나중이에 저장",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
   },
   "background": {
     "service_worker": "background.js",

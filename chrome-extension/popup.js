@@ -1,4 +1,4 @@
-const APP_URL = "http://localhost:3000"; // 배포 후 실제 Vercel URL로 변경
+const APP_URL = "https://najoong-i.vercel.app";
 
 let currentTab = null;
 
